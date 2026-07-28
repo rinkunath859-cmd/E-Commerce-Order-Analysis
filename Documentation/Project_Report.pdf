@@ -1,0 +1,280 @@
+1. Project Title
+
+Sales Performance Dashboard and Business Insights using Power BI
+
+2. Project Overview
+
+This project focuses on analyzing sales transactions, customer information, and sales target data using Microsoft Power BI. The objective is to transform raw business data into meaningful insights through data cleaning, modeling, DAX calculations, and interactive dashboards.
+
+The dashboard enables business stakeholders to monitor sales performance, compare actual sales against targets, evaluate Sales POCs and Sales Managers, understand customer behavior, identify regional trends, and support data-driven decision-making.
+
+3. Problem Statement
+
+The company receives orders from customers across 14 countries through multiple sales channels, including App, Website, WhatsApp, and Other. Due to a system bug at the beginning of the financial year, some Order Source values were not captured correctly.
+
+Management requires an analytical dashboard to:
+
+Identify and fix missing data.
+Track sales performance against targets.
+Monitor Sales Managers and Sales Teams.
+Analyze customer behavior.
+Study country-wise sales performance.
+Understand order trends.
+Improve future business decisions.
+4. Objectives
+
+The primary objectives of this project are:
+
+Import and clean multiple datasets.
+Handle missing Order Source values.
+Create an optimized data model.
+Develop DAX measures for business KPIs.
+Compare actual sales with targets.
+Analyze customer demographics.
+Evaluate Sales Manager performance.
+Study country-wise order trends.
+Build an interactive Power BI dashboard.
+Enable drill-through, bookmarks, and Q&A functionality.
+5. Dataset Description
+
+The project uses three datasets.
+
+Orders
+
+Contains transactional data.
+
+Columns include:
+
+Order ID
+Customer ID
+Order DateTime
+Order Source
+Sales POC
+Order Value
+
+Each Order ID is unique.
+
+Customers
+
+Contains customer information.
+
+Columns include:
+
+Customer ID
+Gender
+Age
+Country
+Category
+
+Each Customer ID is unique.
+
+Sales Targets
+
+Contains sales hierarchy information.
+
+Columns include:
+
+Sales POC
+Sales Manager
+Sales Team
+Sales Target
+
+This table is used to compare target versus actual sales.
+
+6. Tools Used
+Microsoft Power BI Desktop
+Power Query
+DAX (Data Analysis Expressions)
+Microsoft Excel
+GitHub
+7. Data Cleaning Process
+
+The following transformations were performed using Power Query.
+
+Orders Table
+Imported Excel data.
+Corrected data types.
+Checked duplicate records.
+Identified missing Order Source values.
+Determined the first and last timestamps affected by the system bug.
+Replaced missing Order Source values using an appropriate imputation technique.
+Verified Order ID uniqueness.
+Customers Table
+Corrected data types.
+Removed duplicate Customer IDs.
+Verified customer information.
+Sales Targets Table
+Corrected data types.
+Merged Sales Manager First Name and Last Name into a single Sales Manager column.
+Verified Sales POC mapping.
+8. Handling Missing Values
+
+A system bug caused missing values in the Order Source column.
+
+Approach Used
+
+The missing categorical values were imputed using the most appropriate method based on the observed data pattern:
+
+Fill Down (for continuous missing records)
+Mode (Most Frequent Value)
+Why This Approach?
+
+Order Source is a categorical variable. Numerical methods such as mean or median are not suitable. Using the mode or Fill Down preserves the original distribution of the data and minimizes bias.
+
+9. Data Model
+
+Relationships created in Power BI:
+
+Table	Relationship
+Customers → Orders	Customer ID
+Sales Targets → Orders	Sales POC
+
+Relationship Type
+
+One-to-Many
+
+Cross Filter
+
+Single Direction
+
+This star-schema model improves performance and simplifies report development.
+
+10. DAX Measures
+
+The following measures were created.
+
+Total Sales
+Total Sales =
+SUM(Orders[Order Value])
+Total Orders
+Total Orders =
+COUNT(Orders[Order ID])
+Total Customers
+Total Customers =
+DISTINCTCOUNT(Orders[Customer ID])
+Average Order Value
+Average Order Value =
+AVERAGE(Orders[Order Value])
+Sales Target
+Sales Target =
+SUM('Sales Targets'[Target])
+Achievement %
+Achievement % =
+DIVIDE([Total Sales],[Sales Target])
+Sales Gap
+Sales Gap =
+[Sales Target]-[Total Sales]
+Target Status
+Target Status =
+SWITCH(
+TRUE(),
+[Total Sales] < [Sales Target], "Target Not Met",
+[Total Sales] = [Sales Target], "Target Met",
+"Exceeded Target"
+)
+11. Dashboard Pages
+Executive Dashboard
+
+Displays:
+
+Total Sales
+Total Orders
+Total Customers
+Average Order Value
+Sales Target Achievement
+Monthly Sales Trend
+Country-wise Sales
+Sales Targets Dashboard
+
+Displays:
+
+Target vs Actual Sales
+Sales Gap
+Sales Team Performance
+Sales Manager Performance
+Target Achievement Percentage
+Customer Insights
+
+Displays:
+
+Customer Categories
+Gender Distribution
+Average Age
+Customers Without Orders
+Country Analysis
+
+Displays:
+
+Total Sales by Country
+Orders by Country
+Average Order Value
+Top Performing Sales Managers
+Order Analysis
+
+Displays:
+
+Monthly Order Trends
+Order Source Distribution
+Peak Sales Periods
+Order Volume by Country
+12. Key Business Questions Answered
+
+The dashboard answers several important business questions:
+
+Which Sales Managers achieved their targets?
+Which Sales Team generated the highest revenue?
+Which countries contributed the highest sales?
+Which order source is most popular?
+Which customer category generated the highest sales?
+Which customers did not place any orders?
+Which months experienced peak sales?
+Which Sales POCs exceeded their targets?
+Which country had the highest average order value?
+13. Business Insights
+
+Examples of insights include:
+
+Website and Mobile App generated the majority of orders.
+Certain countries contributed significantly more revenue than others.
+A few Sales Managers consistently exceeded their sales targets.
+Customer purchasing behavior varied across categories.
+Monthly sales showed seasonal trends.
+Some Sales Teams required additional support to achieve targets.
+
+Replace these with the actual findings from your dashboard after completing the analysis.
+
+14. Business Recommendations
+Focus marketing efforts on the highest-performing order channels.
+Provide coaching and incentives to underperforming Sales Teams.
+Expand successful sales strategies to lower-performing regions.
+Retain high-value customers through loyalty programs.
+Monitor order source data quality to prevent future system issues.
+Review sales targets periodically to ensure they remain realistic and achievable.
+15. Dashboard Features
+
+The report includes:
+
+Interactive slicers
+Drill-through pages
+Q&A visual
+Bookmarks for Sales Teams
+KPI cards
+Maps
+Trend analysis
+Dynamic charts
+Mobile layout optimization
+16. Challenges Faced
+Missing Order Source values due to a system issue.
+Integrating multiple datasets while maintaining referential integrity.
+Designing DAX measures for target achievement and performance tracking.
+Optimizing visuals for both desktop and mobile users.
+17. Future Enhancements
+Integrate real-time data using Power BI Service.
+Connect to SQL Server or Azure SQL Database.
+Implement Row-Level Security (RLS).
+Add predictive sales forecasting using Power BI forecasting tools.
+Schedule automatic data refreshes.
+Publish dashboards to the Power BI Service for organization-wide access.
+18. Conclusion
+
+This project demonstrates the end-to-end development of a business intelligence solution using Power BI. By cleaning and modeling data, creating meaningful DAX measures, and building interactive dashboards, the project provides actionable insights into sales performance, customer behavior, and target achievement. The solution supports informed decision-making, enabling stakeholders to identify growth opportunities, improve sales strategies, and monitor key business metrics effectively.
